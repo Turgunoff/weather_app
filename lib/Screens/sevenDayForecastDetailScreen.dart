@@ -16,9 +16,9 @@ class SevenDayForecastDetail extends StatefulWidget {
   final int initialIndex;
 
   const SevenDayForecastDetail({
-    Key? key,
+    super.key,
     this.initialIndex = 0,
-  }) : super(key: key);
+  });
 
   @override
   State<SevenDayForecastDetail> createState() => _SevenDayForecastDetailState();
@@ -36,16 +36,17 @@ class _SevenDayForecastDetailState extends State<SevenDayForecastDetail> {
     super.initState();
     _selectedIndex = widget.initialIndex;
     _scrollController = ScrollController();
-    double _position = _selectedIndex * (_itemWidth + 2 * _horizontalPadding) +
+    double position = _selectedIndex * (_itemWidth + 2 * _horizontalPadding) +
         (_selectedWidth + _horizontalPadding);
-    if (_selectedIndex > 1)
+    if (_selectedIndex > 1) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _scrollController.animateTo(
-          _position,
-          duration: Duration(milliseconds: 250),
+          position,
+          duration: const Duration(milliseconds: 250),
           curve: Curves.ease,
         );
       });
+    }
   }
 
   @override
@@ -53,24 +54,24 @@ class _SevenDayForecastDetailState extends State<SevenDayForecastDetail> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text(
+        title: const Text(
           '7-Day Forecast',
           style: TextStyle(color: Colors.black),
         ),
       ),
       body: Consumer<WeatherProvider>(
         builder: (context, weatherProv, _) {
-          DailyWeather _selectedWeather =
+          DailyWeather selectedWeather =
               weatherProv.dailyWeather[_selectedIndex];
           return ListView(
-            physics: BouncingScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: 12.0),
+            physics: const BouncingScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
             children: [
               const SizedBox(height: 12.0),
               SizedBox(
                 height: 98.0,
                 child: ListView.separated(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   controller: _scrollController,
                   separatorBuilder: (context, index) =>
                       const SizedBox(width: 8.0),
@@ -87,7 +88,7 @@ class _SevenDayForecastDetailState extends State<SevenDayForecastDetail> {
                         });
                       },
                       child: Container(
-                        constraints: BoxConstraints(minWidth: 64.0),
+                        constraints: const BoxConstraints(minWidth: 64.0),
                         padding: const EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
                           color: isSelected
@@ -144,18 +145,18 @@ class _SevenDayForecastDetailState extends State<SevenDayForecastDetail> {
                       Text(
                         _selectedIndex == 0
                             ? 'Today'
-                            : DateFormat('EEEE').format(_selectedWeather.date),
+                            : DateFormat('EEEE').format(selectedWeather.date),
                         style: mediumText,
                         maxLines: 1,
                       ),
                       Text(
                         weatherProv.isCelsius
-                            ? '${_selectedWeather.tempMax.toStringAsFixed(0)}°/${_selectedWeather.tempMin.toStringAsFixed(0)}°'
-                            : '${_selectedWeather.tempMax.toFahrenheit().toStringAsFixed(0)}°/${_selectedWeather.tempMin.toFahrenheit().toStringAsFixed(0)}°',
+                            ? '${selectedWeather.tempMax.toStringAsFixed(0)}°/${selectedWeather.tempMin.toStringAsFixed(0)}°'
+                            : '${selectedWeather.tempMax.toFahrenheit().toStringAsFixed(0)}°/${selectedWeather.tempMin.toFahrenheit().toStringAsFixed(0)}°',
                         style: boldText.copyWith(fontSize: 48.0, height: 1.15),
                       ),
                       Text(
-                        _selectedWeather.weatherCategory,
+                        selectedWeather.weatherCategory,
                         style: semiboldText.copyWith(color: primaryBlue),
                       )
                     ],
@@ -164,7 +165,7 @@ class _SevenDayForecastDetailState extends State<SevenDayForecastDetail> {
                     height: 112.0,
                     width: 112.0,
                     child: Image.asset(
-                      getWeatherImage(_selectedWeather.weatherCategory),
+                      getWeatherImage(selectedWeather.weatherCategory),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -189,10 +190,11 @@ class _SevenDayForecastDetailState extends State<SevenDayForecastDetail> {
                       borderRadius: BorderRadius.circular(16.0),
                     ),
                     child: GridView(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         childAspectRatio: 16 / 4,
                         crossAxisCount: 2,
                         crossAxisSpacing: 4,
@@ -201,35 +203,35 @@ class _SevenDayForecastDetailState extends State<SevenDayForecastDetail> {
                       children: [
                         _ForecastDetailInfoTile(
                           title: 'Cloudiness',
-                          icon: PhosphorIcon(
+                          icon: const PhosphorIcon(
                             PhosphorIconsRegular.cloud,
                             color: Colors.white,
                           ),
-                          data: '${_selectedWeather.clouds}%',
+                          data: '${selectedWeather.clouds}%',
                         ),
                         _ForecastDetailInfoTile(
                           title: 'UV Index',
-                          icon: PhosphorIcon(
+                          icon: const PhosphorIcon(
                             PhosphorIconsRegular.sun,
                             color: Colors.white,
                           ),
-                          data: uviValueToString(_selectedWeather.uvi),
+                          data: uviValueToString(selectedWeather.uvi),
                         ),
                         _ForecastDetailInfoTile(
                           title: 'Precipitation',
-                          icon: PhosphorIcon(
+                          icon: const PhosphorIcon(
                             PhosphorIconsRegular.drop,
                             color: Colors.white,
                           ),
-                          data: _selectedWeather.precipitation + '%',
+                          data: selectedWeather.precipitation + '%',
                         ),
                         _ForecastDetailInfoTile(
                           title: 'Humidity',
-                          icon: PhosphorIcon(
+                          icon: const PhosphorIcon(
                             PhosphorIconsRegular.thermometerSimple,
                             color: Colors.white,
                           ),
-                          data: '${_selectedWeather.humidity}%',
+                          data: '${selectedWeather.humidity}%',
                         ),
                       ],
                     ),
@@ -255,10 +257,11 @@ class _SevenDayForecastDetailState extends State<SevenDayForecastDetail> {
                       borderRadius: BorderRadius.circular(16.0),
                     ),
                     child: GridView(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         childAspectRatio: 16 / 4,
                         crossAxisCount: 2,
                         crossAxisSpacing: 4,
@@ -267,43 +270,43 @@ class _SevenDayForecastDetailState extends State<SevenDayForecastDetail> {
                       children: [
                         _ForecastDetailInfoTile(
                           title: 'Morning Temp',
-                          icon: PhosphorIcon(
+                          icon: const PhosphorIcon(
                             PhosphorIconsRegular.thermometerSimple,
                             color: Colors.white,
                           ),
                           data: weatherProv.isCelsius
-                              ? '${_selectedWeather.tempMorning.toStringAsFixed(1)}°'
-                              : '${_selectedWeather.tempMorning.toFahrenheit().toStringAsFixed(1)}°',
+                              ? '${selectedWeather.tempMorning.toStringAsFixed(1)}°'
+                              : '${selectedWeather.tempMorning.toFahrenheit().toStringAsFixed(1)}°',
                         ),
                         _ForecastDetailInfoTile(
                           title: 'Day Temp',
-                          icon: PhosphorIcon(
+                          icon: const PhosphorIcon(
                             PhosphorIconsRegular.thermometerSimple,
                             color: Colors.white,
                           ),
                           data: weatherProv.isCelsius
-                              ? '${_selectedWeather.tempDay.toStringAsFixed(1)}°'
-                              : '${_selectedWeather.tempDay.toFahrenheit().toStringAsFixed(1)}°',
+                              ? '${selectedWeather.tempDay.toStringAsFixed(1)}°'
+                              : '${selectedWeather.tempDay.toFahrenheit().toStringAsFixed(1)}°',
                         ),
                         _ForecastDetailInfoTile(
                           title: 'Evening Temp',
-                          icon: PhosphorIcon(
+                          icon: const PhosphorIcon(
                             PhosphorIconsRegular.thermometerSimple,
                             color: Colors.white,
                           ),
                           data: weatherProv.isCelsius
-                              ? '${_selectedWeather.tempEvening.toStringAsFixed(1)}°'
-                              : '${_selectedWeather.tempEvening.toFahrenheit().toStringAsFixed(1)}°',
+                              ? '${selectedWeather.tempEvening.toStringAsFixed(1)}°'
+                              : '${selectedWeather.tempEvening.toFahrenheit().toStringAsFixed(1)}°',
                         ),
                         _ForecastDetailInfoTile(
                           title: 'Night Temp',
-                          icon: PhosphorIcon(
+                          icon: const PhosphorIcon(
                             PhosphorIconsRegular.thermometerSimple,
                             color: Colors.white,
                           ),
                           data: weatherProv.isCelsius
-                              ? '${_selectedWeather.tempNight.toStringAsFixed(1)}°'
-                              : '${_selectedWeather.tempNight.toFahrenheit().toStringAsFixed(1)}°',
+                              ? '${selectedWeather.tempNight.toStringAsFixed(1)}°'
+                              : '${selectedWeather.tempNight.toFahrenheit().toStringAsFixed(1)}°',
                         ),
                       ],
                     ),
@@ -323,11 +326,11 @@ class _ForecastDetailInfoTile extends StatelessWidget {
   final String data;
   final Widget icon;
   const _ForecastDetailInfoTile({
-    Key? key,
+    super.key,
     required this.title,
     required this.data,
     required this.icon,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -13,6 +13,8 @@ import 'package:provider/provider.dart';
 import '../helper/utils.dart';
 
 class SevenDayForecast extends StatelessWidget {
+  const SevenDayForecast({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,16 +24,16 @@ class SevenDayForecast extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Row(
             children: [
-              PhosphorIcon(PhosphorIconsRegular.calendar),
+              const PhosphorIcon(PhosphorIconsRegular.calendar),
               const SizedBox(width: 4.0),
-              Text(
+              const Text(
                 '7-Day Forecast',
                 style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Consumer<WeatherProvider>(
                 builder: (context, weatherProv, _) {
                   return TextButton(
@@ -41,13 +43,13 @@ class SevenDayForecast extends StatelessWidget {
                       textStyle: mediumText.copyWith(fontSize: 14.0),
                       foregroundColor: primaryBlue,
                     ),
-                    child: Text('more details ▶'),
                     onPressed: weatherProv.isLoading
                         ? null
                         : () {
                             Navigator.of(context)
                                 .pushNamed(SevenDayForecastDetail.routeName);
                           },
+                    child: Text('more details ▶'),
                   );
                 },
               )

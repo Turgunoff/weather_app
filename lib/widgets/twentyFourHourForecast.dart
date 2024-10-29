@@ -12,6 +12,8 @@ import 'package:provider/provider.dart';
 import '../helper/utils.dart';
 
 class TwentyFourHourForecast extends StatelessWidget {
+  const TwentyFourHourForecast({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,7 +27,7 @@ class TwentyFourHourForecast extends StatelessWidget {
                 const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
             child: Row(
               children: [
-                PhosphorIcon(PhosphorIconsRegular.clock),
+                const PhosphorIcon(PhosphorIconsRegular.clock),
                 const SizedBox(width: 4.0),
                 Text(
                   '24-Hour Forecast',
@@ -41,12 +43,12 @@ class TwentyFourHourForecast extends StatelessWidget {
                   height: 128.0,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     itemCount: 10,
                     separatorBuilder: (context, index) =>
                         const SizedBox(width: 12.0),
-                    itemBuilder: (context, index) => CustomShimmer(
+                    itemBuilder: (context, index) => const CustomShimmer(
                       height: 128.0,
                       width: 64.0,
                     ),
@@ -56,7 +58,7 @@ class TwentyFourHourForecast extends StatelessWidget {
               return SizedBox(
                 height: 128.0,
                 child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.symmetric(horizontal: 12.0),
                   scrollDirection: Axis.horizontal,
                   itemCount: weatherProv.hourlyWeather.length,
@@ -79,14 +81,14 @@ class HourlyWeatherWidget extends StatelessWidget {
   final int index;
   final HourlyWeather data;
   const HourlyWeatherWidget({
-    Key? key,
+    super.key,
     required this.index,
     required this.data,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 124.0,
       child: Column(
         children: [
@@ -100,7 +102,7 @@ class HourlyWeatherWidget extends StatelessWidget {
           }),
           Stack(
             children: [
-              Divider(
+              const Divider(
                 thickness: 2.0,
                 color: primaryBlue,
               ),
@@ -112,7 +114,7 @@ class HourlyWeatherWidget extends StatelessWidget {
                   child: Container(
                     width: 10.0,
                     height: 10.0,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.yellow,
                       shape: BoxShape.circle,
                     ),

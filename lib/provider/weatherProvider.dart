@@ -33,7 +33,7 @@ class WeatherProvider with ChangeNotifier {
 
     if (!isLocationserviceEnabled) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Location service disabled')),
+        const SnackBar(content: Text('Location service disabled')),
       );
       return Future.error('Location services are disabled.');
     }
@@ -44,7 +44,7 @@ class WeatherProvider with ChangeNotifier {
       notifyListeners();
       locationPermission = await Geolocator.requestPermission();
       if (locationPermission == LocationPermission.denied) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text('Permission denied'),
         ));
         return Future.error('Location permissions are denied');
@@ -54,7 +54,7 @@ class WeatherProvider with ChangeNotifier {
     if (locationPermission == LocationPermission.deniedForever) {
       isLoading = false;
       notifyListeners();
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text(
           'Location permissions are permanently denied, Please enable manually from app settings',
         ),
@@ -107,7 +107,7 @@ class WeatherProvider with ChangeNotifier {
     } catch (error) {
       print(error);
       isLoading = false;
-      this.isRequestError = true;
+      isRequestError = true;
     }
   }
 
@@ -134,7 +134,7 @@ class WeatherProvider with ChangeNotifier {
     } catch (error) {
       print(error);
       isLoading = false;
-      this.isRequestError = true;
+      isRequestError = true;
     }
   }
 

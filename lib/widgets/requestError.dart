@@ -3,6 +3,8 @@ import 'package:weather_app/provider/weatherProvider.dart';
 import 'package:provider/provider.dart';
 
 class RequestError extends StatelessWidget {
+  const RequestError({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -10,13 +12,13 @@ class RequestError extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.wrong_location_outlined,
             color: Colors.blue,
             size: 100,
           ),
-          SizedBox(height: 10),
-          Text(
+          const SizedBox(height: 10),
+          const Text(
             'No Search Result',
             style: TextStyle(
               color: Colors.blue,
@@ -42,7 +44,7 @@ class RequestError extends StatelessWidget {
                 borderRadius: BorderRadius.circular(25.0),
               ),
             ),
-            child: Text('Return Home'),
+            child: const Text('Return Home'),
             onPressed: () =>
                 Provider.of<WeatherProvider>(context, listen: false)
                     .getWeatherData(context, notify: true),

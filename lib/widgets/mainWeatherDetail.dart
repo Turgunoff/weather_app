@@ -12,6 +12,8 @@ import 'package:weather_app/theme/colors.dart';
 import '../helper/utils.dart';
 
 class MainWeatherDetail extends StatelessWidget {
+  const MainWeatherDetail({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Consumer<WeatherProvider>(builder: (context, weatherProv, _) {
@@ -36,7 +38,7 @@ class MainWeatherDetail extends StatelessWidget {
                 child: Row(
                   children: [
                     DetailInfoTile(
-                        icon: PhosphorIcon(
+                        icon: const PhosphorIcon(
                           PhosphorIconsRegular.thermometerSimple,
                           color: Colors.white,
                         ),
@@ -44,14 +46,14 @@ class MainWeatherDetail extends StatelessWidget {
                         data: weatherProv.isCelsius
                             ? '${weatherProv.weather.feelsLike.toStringAsFixed(1)}°'
                             : '${weatherProv.weather.feelsLike.toFahrenheit().toStringAsFixed(1)}°'),
-                    VerticalDivider(
+                    const VerticalDivider(
                       thickness: 1.0,
                       indent: 4.0,
                       endIndent: 4.0,
                       color: backgroundBlue,
                     ),
                     DetailInfoTile(
-                      icon: PhosphorIcon(
+                      icon: const PhosphorIcon(
                         PhosphorIconsRegular.drop,
                         color: Colors.white,
                       ),
@@ -59,14 +61,14 @@ class MainWeatherDetail extends StatelessWidget {
                       data:
                           '${weatherProv.additionalWeatherData.precipitation}%',
                     ),
-                    VerticalDivider(
+                    const VerticalDivider(
                       thickness: 1.0,
                       indent: 4.0,
                       endIndent: 4.0,
                       color: backgroundBlue,
                     ),
                     DetailInfoTile(
-                      icon: PhosphorIcon(
+                      icon: const PhosphorIcon(
                         PhosphorIconsRegular.sun,
                         color: Colors.white,
                       ),
@@ -79,7 +81,7 @@ class MainWeatherDetail extends StatelessWidget {
                 ),
               ),
             ),
-            Divider(
+            const Divider(
               thickness: 1.0,
               color: backgroundBlue,
             ),
@@ -89,35 +91,35 @@ class MainWeatherDetail extends StatelessWidget {
                 child: Row(
                   children: [
                     DetailInfoTile(
-                      icon: PhosphorIcon(
+                      icon: const PhosphorIcon(
                         PhosphorIconsRegular.wind,
                         color: Colors.white,
                       ),
                       title: 'Wind',
                       data: '${weatherProv.weather.windSpeed} m/s',
                     ),
-                    VerticalDivider(
+                    const VerticalDivider(
                       thickness: 1.0,
                       indent: 4.0,
                       endIndent: 4.0,
                       color: backgroundBlue,
                     ),
                     DetailInfoTile(
-                      icon: PhosphorIcon(
+                      icon: const PhosphorIcon(
                         PhosphorIconsRegular.dropHalfBottom,
                         color: Colors.white,
                       ),
                       title: 'Humidity',
                       data: '${weatherProv.weather.humidity}%',
                     ),
-                    VerticalDivider(
+                    const VerticalDivider(
                       thickness: 1.0,
                       indent: 4.0,
                       endIndent: 4.0,
                       color: backgroundBlue,
                     ),
                     DetailInfoTile(
-                      icon: PhosphorIcon(
+                      icon: const PhosphorIcon(
                         PhosphorIconsRegular.cloud,
                         color: Colors.white,
                       ),
@@ -140,11 +142,11 @@ class DetailInfoTile extends StatelessWidget {
   final String data;
   final Widget icon;
   const DetailInfoTile({
-    Key? key,
+    super.key,
     required this.title,
     required this.data,
     required this.icon,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

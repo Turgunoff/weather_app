@@ -18,7 +18,7 @@ import '../widgets/twentyFourHourForecast.dart';
 import 'requestError.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -43,23 +43,24 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: Consumer<WeatherProvider>(
         builder: (context, weatherProv, _) {
-          if (!weatherProv.isLoading && !weatherProv.isLocationserviceEnabled)
-            return LocationServiceErrorDisplay();
+          if (!weatherProv.isLoading && !weatherProv.isLocationserviceEnabled) {
+            return const LocationServiceErrorDisplay();
+          }
 
           if (!weatherProv.isLoading &&
               weatherProv.locationPermission != LocationPermission.always &&
               weatherProv.locationPermission != LocationPermission.whileInUse) {
-            return LocationPermissionErrorDisplay();
+            return const LocationPermissionErrorDisplay();
           }
 
-          if (weatherProv.isRequestError) return RequestErrorDisplay();
+          if (weatherProv.isRequestError) return const RequestErrorDisplay();
 
           if (weatherProv.isSearchError) return SearchErrorDisplay(fsc: fsc);
 
           return Stack(
             children: [
               ListView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 padding: const EdgeInsets.all(12.0).copyWith(
                   top: kToolbarHeight +
                       MediaQuery.viewPaddingOf(context).top +
@@ -89,16 +90,16 @@ class _HomeScreenState extends State<HomeScreen> {
 class CustomSearchBar extends StatefulWidget {
   final FloatingSearchBarController fsc;
   const CustomSearchBar({
-    Key? key,
+    super.key,
     required this.fsc,
-  }) : super(key: key);
+  });
 
   @override
   State<CustomSearchBar> createState() => _CustomSearchBarState();
 }
 
 class _CustomSearchBarState extends State<CustomSearchBar> {
-  List<String> _citiesSuggestion = [
+  final List<String> _citiesSuggestion = [
     'New York',
     'Tokyo',
     'Dubai',
@@ -132,7 +133,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
       },
       transition: CircularFloatingSearchBarTransition(),
       actions: [
-        FloatingSearchBarAction(
+        const FloatingSearchBarAction(
           showIfOpened: false,
           child: PhosphorIcon(
             PhosphorIconsBold.magnifyingGlass,
@@ -142,7 +143,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
         FloatingSearchBarAction.icon(
           showIfClosed: false,
           showIfOpened: true,
-          icon: PhosphorIcon(
+          icon: const PhosphorIcon(
             PhosphorIconsBold.x,
             color: primaryBlue,
           ),
@@ -163,7 +164,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
             elevation: 4.0,
             child: ListView.separated(
               shrinkWrap: true,
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               padding: EdgeInsets.zero,
               itemCount: _citiesSuggestion.length,
               itemBuilder: (context, index) {
@@ -179,7 +180,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                     padding: const EdgeInsets.all(22.0),
                     child: Row(
                       children: [
-                        PhosphorIcon(PhosphorIconsFill.mapPin),
+                        const PhosphorIcon(PhosphorIconsFill.mapPin),
                         const SizedBox(width: 22.0),
                         Text(data, style: mediumText),
                       ],
@@ -187,7 +188,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                   ),
                 );
               },
-              separatorBuilder: (context, index) => Divider(
+              separatorBuilder: (context, index) => const Divider(
                 thickness: 1.0,
                 height: 0.0,
               ),

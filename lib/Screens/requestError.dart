@@ -7,7 +7,7 @@ import '../provider/weatherProvider.dart';
 import '../theme/textStyle.dart';
 
 class RequestErrorDisplay extends StatelessWidget {
-  const RequestErrorDisplay({Key? key}) : super(key: key);
+  const RequestErrorDisplay({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +48,8 @@ class RequestErrorDisplay extends StatelessWidget {
                   backgroundColor: primaryBlue,
                   textStyle: mediumText,
                   padding: const EdgeInsets.all(12.0),
-                  shape: StadiumBorder(),
+                  shape: const StadiumBorder(),
                 ),
-                child: Text('Return Home'),
                 onPressed: weatherProv.isLoading
                     ? null
                     : () async {
@@ -59,6 +58,7 @@ class RequestErrorDisplay extends StatelessWidget {
                           notify: true,
                         );
                       },
+                child: Text('Return Home'),
               ),
             );
           }),
@@ -70,9 +70,9 @@ class RequestErrorDisplay extends StatelessWidget {
 
 class SearchErrorDisplay extends StatelessWidget {
   const SearchErrorDisplay({
-    Key? key,
+    super.key,
     required this.fsc,
-  }) : super(key: key);
+  });
 
   final FloatingSearchBarController fsc;
 
@@ -115,9 +115,8 @@ class SearchErrorDisplay extends StatelessWidget {
                   backgroundColor: primaryBlue,
                   textStyle: mediumText,
                   padding: const EdgeInsets.all(12.0),
-                  shape: StadiumBorder(),
+                  shape: const StadiumBorder(),
                 ),
-                child: Text('Return Home'),
                 onPressed: weatherProv.isLoading
                     ? null
                     : () async {
@@ -126,6 +125,7 @@ class SearchErrorDisplay extends StatelessWidget {
                           notify: true,
                         );
                       },
+                child: Text('Return Home'),
               ),
             );
           }),

@@ -8,11 +8,13 @@ import 'screens/sevenDayForecastDetailScreen.dart';
 
 void main() {
   runApp(
-    MyApp(),
+    const MyApp(),
   );
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Weather',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          appBarTheme: AppBarTheme(
+          appBarTheme: const AppBarTheme(
             backgroundColor: Colors.white,
             iconTheme: IconThemeData(color: Colors.blue),
             elevation: 0,
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget {
           colorScheme:
               ColorScheme.fromSwatch().copyWith(secondary: Colors.white),
         ),
-        home: HomeScreen(),
+        home: const HomeScreen(),
         // routes: {
         //   WeeklyScreen.routeName: (ctx) => WeeklyScreen(),
         // },
@@ -53,7 +55,7 @@ class MyApp extends StatelessWidget {
             );
           }
           // Unknown route
-          return MaterialPageRoute(builder: (_) => HomeScreen());
+          return MaterialPageRoute(builder: (_) => const HomeScreen());
         },
       ),
     );

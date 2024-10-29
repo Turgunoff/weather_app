@@ -8,11 +8,13 @@ import 'package:provider/provider.dart';
 import 'customShimmer.dart';
 
 class MainWeatherInfo extends StatelessWidget {
+  const MainWeatherInfo({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Consumer<WeatherProvider>(builder: (context, weatherProv, _) {
       if (weatherProv.isLoading) {
-        return Row(
+        return const Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Expanded(
@@ -21,7 +23,7 @@ class MainWeatherInfo extends StatelessWidget {
                 width: 148.0,
               ),
             ),
-            const SizedBox(width: 16.0),
+            SizedBox(width: 16.0),
             CustomShimmer(
               height: 148.0,
               width: 148.0,
